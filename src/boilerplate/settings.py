@@ -40,7 +40,9 @@ INSTALLED_APPS = [
     # Internal apps
     "accounts",
     # 3rd party apps
+    "rest_framework",
     "django_vite",
+    "drf_spectacular"
 ]
 
 MIDDLEWARE = [
@@ -104,6 +106,25 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+# REST Framework settings
+
+REST_FRAMEWORK ={
+    'DEFAULT_SCHEMA_CLASS':'drf_spectacular.openapi.AutoSchema'
+}
+
+# DRF Spectacular settings: OpenAPI
+SPECTACULAR_SETTINGS = {
+    'TITLE': 'BoilerPlate',
+    'DESCRIPTION': 'The boilerplate with Django, DRF, React and Vite',
+    'VERSION': '1.0.0',
+    'SERVE_INCLUDE_SCHEMA': False,
+    'SERVE_PUBLIC': False,
+    'CONTACT':{
+        'name':"Waqar Ali",
+        "url":'https://github.com/Waqar-SE',
+        'email':"waqar_se@outlook.com"
+    }
+}
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
