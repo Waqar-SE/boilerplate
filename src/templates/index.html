@@ -1,0 +1,20 @@
+
+{% load static %}
+{% load django_vite %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="shortcut icon" type="icon/png" href="{% static 'favicon.ico' %}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BoilerPlate</title>
+
+    {% vite_hmr_client %}
+    {% vite_react_refresh nonce="{{ request.csp_nonce }}" %}
+    {% vite_asset 'src/frontend/main.jsx' %}
+</head>
+<body >
+    <div id="root"></div>
+</body>
+</html>

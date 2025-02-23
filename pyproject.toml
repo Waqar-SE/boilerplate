@@ -7,11 +7,17 @@ authors = [
 ]
 dependencies = [
     "django>=5.1.6",
+    "django-vite>=3.1.0",
 ]
 requires-python = "==3.12.*"
 readme = "README.md"
 license = {text = "MIT"}
 
 
+[project.optional-dependencies]
+test = [
+    "pre-commit>=4.1.0",
+    "ruff>=0.9.7",
+]
 [tool.pdm]
 distribution = false
