@@ -1,6 +1,4 @@
-from django.urls import path,include
+from django.urls import path, include
 
 
-urlpatterns = [
-    path('api/',include('accounts.api.urls'))
-]
+urlpatterns = [path("api/", include("accounts.api.urls"))]

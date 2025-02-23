@@ -11,21 +11,30 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
+import environ
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+
+env = environ.Env(
+    DEBUG=(bool, False),
+    SECRET_KEY=(str, ""),
+    ALLOWED_HOSTS=(list, []),
+    DATABASE_URL=(str, ""),
+)
+environ.Env.read_env(BASE_DIR.parent / ".env")
 
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-h+g=biu79!i51rd%j7)iq)9w2i6ifir^q$eg2_cvf(mm2c6+lv"
+SECRET_KEY = env("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = env("DEBUG")
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = env("ALLOWED_HOSTS")
 
 
 # Application definition
@@ -42,7 +51,7 @@ INSTALLED_APPS = [
     # 3rd party apps
     "rest_framework",
     "django_vite",
-    "drf_spectacular"
+    "drf_spectacular",
 ]
 
 MIDDLEWARE = [
@@ -80,12 +89,7 @@ WSGI_APPLICATION = "boilerplate.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
-    }
-}
+DATABASES = {"default": env.db()}
 
 
 # Password validation
@@ -108,22 +112,20 @@ AUTH_PASSWORD_VALIDATORS = [
 
 # REST Framework settings
 
-REST_FRAMEWORK ={
-    'DEFAULT_SCHEMA_CLASS':'drf_spectacular.openapi.AutoSchema'
-}
+REST_FRAMEWORK = {"DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema"}
 
 # DRF Spectacular settings: OpenAPI
 SPECTACULAR_SETTINGS = {
-    'TITLE': 'BoilerPlate',
-    'DESCRIPTION': 'The boilerplate with Django, DRF, React and Vite',
-    'VERSION': '1.0.0',
-    'SERVE_INCLUDE_SCHEMA': False,
-    'SERVE_PUBLIC': False,
-    'CONTACT':{
-        'name':"Waqar Ali",
-        "url":'https://github.com/Waqar-SE',
-        'email':"waqar_se@outlook.com"
-    }
+    "TITLE": "BoilerPlate",
+    "DESCRIPTION": "The boilerplate with Django, DRF, React and Vite",
+    "VERSION": "1.0.0",
+    "SERVE_INCLUDE_SCHEMA": False,
+    "SERVE_PUBLIC": False,
+    "CONTACT": {
+        "name": "Waqar Ali",
+        "url": "https://github.com/Waqar-SE",
+        "email": "waqar_se@outlook.com",
+    },
 }
 
 # Internationalization
@@ -142,9 +144,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = "static/"
-STATICFILES_DIRS=[
-    BASE_DIR.parent / 'public'
-]
+STATICFILES_DIRS = [BASE_DIR.parent / "public"]
 STATIC_ROOT = BASE_DIR.parent / "staticfiles"
 
 # Default primary key field type
