@@ -1,8 +1,8 @@
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v5.0.0  # Use the ref you want to point at
+    rev: v5.0.0 # Use the ref you want to point at
     hooks:
-    -   id: trailing-whitespace
+      - id: trailing-whitespace
 
   - repo: https://github.com/astral-sh/ruff-pre-commit
     # Ruff version.
@@ -10,5 +10,24 @@ repos:
     hooks:
       # Run the linter.
       - id: ruff
+        args: [--fix]
       # Run the formatter.
       - id: ruff-format
+
+  - repo: https://github.com/crate-ci/typos
+    rev: v1.29.9
+    hooks:
+      - id: typos
+
+  - repo: https://github.com/hhatto/autopep8
+    rev: v2.3.2 # select the tag or revision you want, or run `pre-commit autoupdate`
+    hooks:
+      - id: autopep8
+
+  - repo: local
+    hooks:
+      - id: django-local
+        name: "Django check breaking changes"
+        entry: ./scripts/django_checks.sh
+        language: script
+        types: [python]
