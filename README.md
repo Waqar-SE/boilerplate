@@ -12,7 +12,7 @@
 
 ## A Boilerplate to kit start Django and React Application development
 
-#### Tech Stack 
+#### Tech Stack
 
 - Django
 - React
@@ -33,11 +33,11 @@ Setting the value `DATABASE_URL` correctly in `.env` file will enable the releva
 - Vite
 
 ## Setup Instructions
-Fork the repository, clone the forked repo into your system. 
+Fork the repository, clone the forked repo into your system.
 The very first thing you would want to do is to rename the Django project to name of your liking for which there is a [rename](./scripts/rename.sh) script.
 
 `./scripts/rename.sh <new_name> <old_name>`
- 
+
 Old name is optional, in case you want to rename it again.
 
 

@@ -153,3 +153,4 @@ STATIC_ROOT = BASE_DIR.parent / "staticfiles"
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 DJANGO_VITE = {"default": {"dev_mode": DEBUG}}
+OTP_EXPIRY_MS = 1000
