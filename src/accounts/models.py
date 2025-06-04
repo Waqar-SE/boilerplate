@@ -34,6 +34,12 @@ class User(AbstractUser):
         else:
             return otp
 
+    def send_email(self, subject, content):
+        pass
+
+    def send_sms(self, content):
+        pass
+
 
 class OTP(BaseModel):
     user = models.ForeignKey(
@@ -70,6 +76,17 @@ class OTP(BaseModel):
             code="".join(random.choices(string.digits, k=6)),
             expired=False,
         )
+
+    def send_otp(self):
+        match self.channel:
+            case "email":
+                self.user.send_email("Account Verification")
+            case "sms":
+                self.user.send_sms("Account Verification")
+            case _:
+                raise ValidationError(
+                    "Invalid strategy set for OTP, should be Email or SMS."
+                )
 
 
 class Organization(BaseModel):

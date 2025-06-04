@@ -1,3 +1,4 @@
+import React from "react";
 function App() {
   return (
     <div
@@ -21,8 +22,12 @@ function App() {
         <p>
           Contribution from: <span className="lato-bold-italic">Waqar Ali</span>
         </p>
-        <p>Let's connect:</p>
-        <a href="https://www.linkedin.com/in/waqar-se/" target="_blank">
+        <p>Let&apos;s connect:</p>
+        <a
+          href="https://www.linkedin.com/in/waqar-se/"
+          target="_blank"
+          rel="noreferrer"
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             x="0px"
@@ -49,7 +54,7 @@ function App() {
             ></path>
           </svg>
         </a>
-        <a href="https://github.com/Waqar-SE" target="_blank">
+        <a href="https://github.com/Waqar-SE" target="_blank" rel="noreferrer">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             x="0px"
@@ -66,8 +71,8 @@ function App() {
               y2="23.508"
               gradientUnits="userSpaceOnUse"
             >
-              <stop offset="0" stop-color="#4c4c4c"></stop>
-              <stop offset="1" stop-color="#343434"></stop>
+              <stop offset="0" stopColor="#4c4c4c"></stop>
+              <stop offset="1" stopColor="#343434"></stop>
             </linearGradient>
             <path
               fill="url(#rL2wppHyxHVbobwndsT6Ca_AZOZNnY73haj_gr1)"

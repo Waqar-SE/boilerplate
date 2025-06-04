@@ -37,7 +37,7 @@ class SignUpSerializer(serializers.ModelSerializer):
         organization = models.Organization.objects.create(
             **profile_data.pop("organization")
         )
-        user = super().create(validated_data)
+        user = super().create(validated_data, is_active=False)
         models.Profile.objects.create(
             organization=organization, user=user, **profile_data
         )
@@ -71,6 +71,7 @@ class SendOTPSerializer(serializers.ModelSerializer):
         otp = models.OTP.generate_new_otp(
             user=user, channel="email" if "email" in validated_data else "phone_number"
         )
+        otp.send_otp()
         return otp
 
 
@@ -93,7 +94,9 @@ class VerifyOTPSerializer(SendOTPSerializer):
         otp = user.get_active_otp
 
         if attrs.get("code") != otp.code:
-            raise serializers.ValidationError("Invalid Code, Please cross check.")
+            raise serializers.ValidationError(
+                "Invalid Code, Please try again OR request a new OTP."
+            )
 
         attrs["user"] = user
         attrs["otp"] = otp

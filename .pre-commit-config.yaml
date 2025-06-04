@@ -31,3 +31,8 @@ repos:
         entry: ./scripts/django_checks.sh
         language: script
         types: [python]
+
+      - id: frontend-linting
+        name: "Frontend Checks"
+        entry: npx eslint --fix
+        language: system
