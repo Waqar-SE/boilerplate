@@ -19,7 +19,7 @@ class SignUpTestCase(BaseTestCase):
                 "first_name": "Waqar",
                 "last_name": "Ali",
                 "phone_number": "+92333 8693455",
-                "profiles": {"office_number": "+92333 8693455"},
+                "profile": {"office_number": "+92333 8693455"},
                 "organization": {"name": "Test", "address": "Test Address"},
             },
         )

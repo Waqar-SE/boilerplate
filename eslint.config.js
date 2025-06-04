@@ -1,35 +1,33 @@
 import js from "@eslint/js";
 import globals from "globals";
+import reactHooks from "eslint-plugin-react-hooks";
+import reactRefresh from "eslint-plugin-react-refresh";
 import tseslint from "typescript-eslint";
-import pluginReact from "eslint-plugin-react";
 import deMorgan from "eslint-plugin-de-morgan";
-import noSecrets from "eslint-plugin-no-secrets";
-import { defineConfig } from "eslint/config";
 
-export default defineConfig([
-  { ignores: ["*", "!src/frontend/**/*"] },
+export default tseslint.config(
+  { ignores: ["*","!src/frontend/**/*"] },
   {
-    plugins: { js },
-    extends: ["js/recommended"],
-  },
-  {
-    languageOptions: { globals: globals.browser },
-  },
-  {
-    rules: {
-      "no-unused-vars": "warn",
-      "no-undef": "warn",
+    extends: [
+      js.configs.recommended,
+      ...tseslint.configs.recommended,
+      deMorgan.configs.recommended,
+    ],
+    files: ["**/*.{ts,tsx}"],
+    languageOptions: {
+      ecmaVersion: 2020,
+      globals: globals.browser,
     },
-  },
-  {
     plugins: {
-      "no-secrets": noSecrets,
+      "react-hooks": reactHooks,
+      "react-refresh": reactRefresh,
     },
     rules: {
-      "no-secrets/no-secrets": "error",
+      ...reactHooks.configs.recommended.rules,
+      "react-refresh/only-export-components": [
+        "warn",
+        { allowConstantExport: true },
+      ],
     },
-  },
-  deMorgan.configs.recommended,
-  tseslint.configs.recommended,
-  pluginReact.configs.flat.recommended,
-]);
+  }
+);

@@ -16,10 +16,8 @@ class SignUpOrganizationSerializer(serializers.ModelSerializer):
 
 
 class SignUpSerializer(serializers.ModelSerializer):
-    profiles = SignUpProfileSerializer(write_only=True)
-    organization = SignUpOrganizationSerializer(
-        source="profiles.organization", write_only=True
-    )
+    profile = SignUpProfileSerializer(write_only=True)
+    organization = SignUpOrganizationSerializer(write_only=True)
 
     class Meta:
         model = get_user_model()
@@ -28,16 +26,16 @@ class SignUpSerializer(serializers.ModelSerializer):
             "last_name",
             "email",
             "phone_number",
-            "profiles",
+            "profile",
             "organization",
         ]
 
     def create(self, validated_data):
-        profile_data = validated_data.pop("profiles", {})
+        profile_data = validated_data.pop("profile", {})
         organization = models.Organization.objects.create(
-            **profile_data.pop("organization")
+            **validated_data.pop("organization")
         )
-        user = super().create(validated_data, is_active=False)
+        user = super().create({**validated_data, "is_active": False})
         models.Profile.objects.create(
             organization=organization, user=user, **profile_data
         )

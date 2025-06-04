@@ -1,8 +1,9 @@
-import "vite/modulepreload-polyfill";
 import React from "react";
 
+import "vite/modulepreload-polyfill";
+
 import { createRoot } from "react-dom/client";
+import '@/assets/index.css'
 import App from "./App";
-import "/public/css/main.css";
 
 createRoot(document.getElementById("root") as HTMLElement).render(<App />);
